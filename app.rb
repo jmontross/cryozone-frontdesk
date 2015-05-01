@@ -43,13 +43,16 @@ get '/' do
   # redirect_uri=REDIRECT_URL&
   # client_id=CLIENT_ID&
   # client_secret=SECRET
-  token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
-  response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
-  response.class.name
+  # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
+  # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
+  # response.class.name
 end
 
 get '/reports' do
   erb "reports and params :#{params.inspect} "
+  # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
+  # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
+  # response.class.name
 end
 
 
