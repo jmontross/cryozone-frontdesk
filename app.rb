@@ -34,7 +34,7 @@ end
 
 get '/' do
   erb 'Can you handle a <a href="/secure/place">secret</a>?'
-  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/authorize')
+  @client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/')
 
   url = client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
   "login at <a href='#{url}'>#{url}</a>"
@@ -51,8 +51,8 @@ end
 
 get '/reports' do
   erb "reports and params :#{params.inspect} "
-  token = params[:code]
-
+  code = params["code"]
+  puts "code #{code}"
 #   Desk and granting access to your application:
 # https://myapp.com/calback?code=AUTH_CODE
 
@@ -64,8 +64,11 @@ get '/reports' do
 #   redirect_uri=REDIRECT_URL&
 #   client_id=CLIENT_ID&
 #   client_secret=SECRET
-  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/token')
-  headers = {:grant_type => "authorization_code",:code => token,:redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
+  @client ||= OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/')
+  headers = {
+    :grant_type => "authorization_code",
+    :code => code,
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
   token = client.auth_code.get_token('code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
