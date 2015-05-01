@@ -37,7 +37,7 @@ get '/' do
   client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/authorize')
 
   url = client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
-  "login at <a href'#{url}'"
+  "login at <a href='#{url}'>#{url}</a>"
 # => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
   #   grant_type=authorization_code&
   # code=AUTH_CODE&
