@@ -36,7 +36,8 @@ get '/' do
   erb 'Can you handle a <a href="/secure/place">secret</a>?'
   client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/authorize')
 
-  client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
+  url = client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
+  "login at <a href'#{url}'"
 # => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
   #   grant_type=authorization_code&
   # code=AUTH_CODE&
@@ -50,7 +51,23 @@ end
 
 get '/reports' do
   erb "reports and params :#{params.inspect} "
+  token = params[:code]
+
+#   Desk and granting access to your application:
+# https://myapp.com/calback?code=AUTH_CODE
+
+# Your server exchanges the authorization code for an access token:
+
+# POST https://frontdeskhq.com/oauth/token
+#   grant_type=authorization_code&
+#   code=AUTH_CODE&
+#   redirect_uri=REDIRECT_URL&
+#   client_id=CLIENT_ID&
+#   client_secret=SECRET
+  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/token')
+  headers = {:grant_type => "authorization_code",:code => token,:redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
+  token = client.auth_code.get_token('code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
   # response.class.name
 end
