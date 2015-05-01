@@ -1,5 +1,18 @@
+# Name  TheCryoZone Internal App
+# URL   http://www.thecryozone.herokuapp.com
+# Callback URL  http://www.thecryozone.herokuapp.com/reports
+# Support URL   
+# Client ID   s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM
+# Client Secret   FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V 
+# https://developer.frontdeskhq.com/oauth_clients/64
+
+# https://developer.frontdeskhq.com/docs/api/v2#endpoint-account-people
+# https://developer.frontdeskhq.com/docs/api/v2
+
 require 'rubygems'
 require 'sinatra'
+require 'oauth2'
+
 
 configure do
   enable :sessions
@@ -21,6 +34,18 @@ end
 
 get '/' do
   erb 'Can you handle a <a href="/secure/place">secret</a>?'
+  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'http://thecryozone.herokuapp.com')
+
+  client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
+# => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
+  #   grant_type=authorization_code&
+  # code=AUTH_CODE&
+  # redirect_uri=REDIRECT_URL&
+  # client_id=CLIENT_ID&
+  # client_secret=SECRET
+  token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
+  response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
+  response.class.name
 end
 
 get '/reports' do
