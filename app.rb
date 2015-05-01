@@ -34,7 +34,7 @@ end
 
 get '/' do
   erb 'Can you handle a <a href="/secure/place">secret</a>?'
-  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'http://thecryozone.herokuapp.com')
+  client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/authorize')
 
   client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
 # => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
