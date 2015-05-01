@@ -36,7 +36,7 @@ get '/' do
   erb 'Can you handle a <a href="/secure/place">secret</a>?'
   @client = OAuth2::Client.new('s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM', 'FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V', :site => 'https://frontdeskhq.com/oauth/authorize')
 
-  url = client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
+  url = @client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
   "login at <a href='#{url}'>#{url}</a>"
 # => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
   #   grant_type=authorization_code&
@@ -70,7 +70,7 @@ get '/reports' do
     :code => code,
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
-  token = client.auth_code.get_token('code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
+  token = @client.auth_code.get_token('code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
   # response.class.name
 end
