@@ -116,9 +116,9 @@ get '/monthly_customers' do
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
 
-  response = @token.get('/api/v2/desk/people', :params => { 'page' => @page })
-  logger.info(response.inspect)
-  erb :monthly_customers
+  @response = @token.get('/api/v2/desk/people', :params => { 'page' => @page })
+  logger.info(@response.inspect)
+  erb :monthly_customers, locals: {response: @response} 
 end
 
 get '/weekly_reports' do 
