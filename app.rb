@@ -88,6 +88,10 @@ headers = {
   # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
   puts "token #{token}"
   logger.info( "token #{token}")
+  # token.
+  response = token.get('/api/v2/desk/people')
+  logger(response.inspect)
+  logger(response.class.name)
   "code: #{code}... token: #{token.inspect}"
 end
 
