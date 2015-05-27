@@ -118,7 +118,7 @@ get '/monthly_customers' do
 
   @response = @token.get('/api/v2/desk/people', :params => { 'page' => @page })
   logger.info(@response.inspect)
-  erb :monthly_customers, locals: {response: @response} 
+  erb :monthly_customers #, locals: {response: @response} 
 end
 
 get '/weekly_reports' do 
