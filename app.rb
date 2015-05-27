@@ -78,7 +78,7 @@ get '/reports' do
 #   client_secret=SECRET
 @client_id=ENV['CLIENT_ID']
 @client_secret=ENV['CLIENT_SECRET']
- 
+
 @client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://thecryozone.frontdeskhq.com/')
 headers = {
     :grant_type => "authorization_code",
@@ -91,8 +91,8 @@ headers = {
   logger.info( "token #{token}")
   # token.
   response = token.get('/api/v2/desk/people')
-  logger(response.inspect)
-  logger(response.class.name)
+  logger.info(response.inspect)
+  logger.info(response.class.name)
   "code: #{code}... token: #{token.inspect}"
 end
 
