@@ -102,7 +102,7 @@ get '/all_customers' do
 end
 
 get '/monthly_customers' do
-  response = @token.get('/api/v2/desk/people', :params => { 'page' => '1' }))
+  response = @token.get('/api/v2/desk/people', :params => { 'page' => '1' })
   erb :monthly_customers
 end
 
