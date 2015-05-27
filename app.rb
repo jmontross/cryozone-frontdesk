@@ -99,7 +99,7 @@ headers = {
 end
 
 get '/all_customers' do
-  erb :menu
+  erb :people
 end
 
 get '/monthly_customers' do
