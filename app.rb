@@ -93,7 +93,7 @@ headers = {
   response = @token.get('/api/v2/desk/people')
   logger.info(response.inspect)
   logger.info(response.class.name)
-  "code: #{code}... token: #{token.inspect}"
+  "code: #{code}... token: #{@token.inspect}"
   erb :menu
 end
 
