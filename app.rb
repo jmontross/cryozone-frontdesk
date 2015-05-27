@@ -88,6 +88,7 @@ headers = {
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
+  session[:identity] = "CryoZone partner"
   # response = @token.get('/api/resource', :params => { 'access_@token' => 'bar' })
   puts "@token #{@token}"
   logger.info( "@token #{@token}")
