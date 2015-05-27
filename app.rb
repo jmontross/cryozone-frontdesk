@@ -64,6 +64,7 @@ end
 get '/reports' do
   erb "reports and params :#{params.inspect} "
   @code = params["code"]
+  session[:code] = @code
   puts "code #{@code}"
   logger.info("@code #{@code}")
 #   Desk and granting access to your application:
@@ -103,6 +104,7 @@ get '/all_customers' do
 end
 
 get '/monthly_customers' do
+ @code=session[:code]
  @client_id=ENV['CLIENT_ID']
  @client_secret=ENV['CLIENT_SECRET']
 
