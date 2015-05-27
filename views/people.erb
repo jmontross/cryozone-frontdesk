@@ -1,8 +1,8 @@
 all customers
 
-<% response.body["people"].each do |person| %>
+<% response.body.first["people"].each do |person| %>
 
-<%= person['first_name'] %> <%= person['last_name'] %> <br />
+<%= person['first_name'] %> <%= person['last_name'] %> <%=person['secondary_info_field']<br />
 
 
 <% end %>
