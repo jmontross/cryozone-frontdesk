@@ -78,7 +78,8 @@ get '/reports' do
 #   client_secret=SECRET
 @client_id=ENV['CLIENT_ID']
 @client_secret=ENV['CLIENT_SECRET']
-@client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://frontdeskhq.com/')
+ 
+@client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://thecryozone.frontdeskhq.com/')
 headers = {
     :grant_type => "authorization_code",
     :code => code,
