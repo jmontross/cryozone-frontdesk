@@ -1,4 +1,4 @@
-all customers (<%=response['total_count']%>)
+<h1> all customers (<%=response['total_count']%>) </h1>
 
 
 <% response['people'].each do |person| %>
@@ -7,6 +7,4 @@ all customers (<%=response['total_count']%>)
 
 <% end %>
 
-<%= response['next_page'] %>
-
-<%= response.inspect %>
+<%= response['next'] %>

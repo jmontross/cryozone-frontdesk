@@ -112,7 +112,9 @@ get '/all_customers' do
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
 
   response = @token.get('/api/v2/desk/people') #, :params => { 'page' => @page })
-  logger.info(response.inspect)
+  #  IF RESPONSE NEXT... then keep polling the people... 
+  logger.info("next?")
+  logger.info(JSON.parse(response.body)["next"])
   # erb :monthly_customers , locals: {response:  JSON.parse(response.body)} 
   # @response = JSON.parse(response.body)
   erb :people, locals: {response:  JSON.parse(response.body)} 
