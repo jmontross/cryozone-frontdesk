@@ -1,6 +1,6 @@
 all customers
 
-<% response.body.first["people"].each do |person| %>
+<% @people.each do |person| %>
 
 <%= person['first_name'] %> <%= person['last_name'] %> referral source: <%=person['secondary_info_field'] %> <br />
 
