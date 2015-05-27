@@ -108,7 +108,7 @@ get '/monthly_customers' do
  @client_id=ENV['CLIENT_ID']
  @client_secret=ENV['CLIENT_SECRET']
  page=params[:page]
- page||=1
+ @page=1
  @client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://thecryozone.frontdeskhq.com/')
  headers = {
     :grant_type => "authorization_code",
@@ -116,7 +116,7 @@ get '/monthly_customers' do
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
 
-  response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
+  response = @token.get('/api/v2/desk/people', :params => { 'page' => @page })
   erb :monthly_customers
 end
 
