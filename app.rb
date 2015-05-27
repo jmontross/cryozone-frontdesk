@@ -85,17 +85,30 @@ headers = {
     :code => code,
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
-  token = @client.auth_code.get_token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
-  # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
-  puts "token #{token}"
-  logger.info( "token #{token}")
-  # token.
-  response = token.get('/api/v2/desk/people')
+  @token = @client.auth_code.get_@token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
+  # response = @token.get('/api/resource', :params => { 'access_@token' => 'bar' })
+  puts "@token #{@token}"
+  logger.info( "@token #{@token}")
+  # @token.
+  response = @token.get('/api/v2/desk/people')
   logger.info(response.inspect)
   logger.info(response.class.name)
   "code: #{code}... token: #{token.inspect}"
+  erb :menu
 end
 
+get '/all_customers' do
+  erb :menu
+end
+
+get '/monthly_customers' do
+  response = @token.get('/api/v2/desk/people', :params => { 'page' => '1' }))
+  erb :monthly_customers
+end
+
+get '/weekly_reports' do 
+  erb :weekly_reports
+end
 
 get '/login/form' do 
   erb :login_form
