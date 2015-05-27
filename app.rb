@@ -84,7 +84,7 @@ get '/reports' do
 headers = {
     :grant_type => "authorization_code",
     :code => @code,
-    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret =>, @client_secret}
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = @token.get('/api/resource', :params => { 'access_@token' => 'bar' })
@@ -110,7 +110,7 @@ get '/monthly_customers' do
  headers = {
     :grant_type => "authorization_code",
     :code => @code,
-    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret =>, @client_secret}
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
   @token = @client.auth_code.get_token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
 
   response = @token.get('/api/v2/desk/people', :params => { 'page' => '1' })
