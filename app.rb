@@ -87,7 +87,7 @@ headers = {
   token = @client.auth_code.get_token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = token.get('/api/resource', :params => { 'access_token' => 'bar' })
   puts "token #{token}"
-  # response.class.name
+  "code: #{code}... token: #{token.inspect}"
 end
 
 
