@@ -13,6 +13,14 @@ require 'rubygems'
 require 'sinatra'
 require 'oauth2'
 
+use Rack::Logger
+
+helpers do
+  def logger
+    request.logger
+  end
+end
+
 
 configure do
   enable :sessions
@@ -56,6 +64,7 @@ get '/reports' do
   erb "reports and params :#{params.inspect} "
   code = params["code"]
   puts "code #{code}"
+  logger.info("code #{code}")
 #   Desk and granting access to your application:
 # https://myapp.com/calback?code=AUTH_CODE
 
@@ -69,8 +78,8 @@ get '/reports' do
 #   client_secret=SECRET
 @client_id=ENV['CLIENT_ID']
 @client_secret=ENV['CLIENT_SECRET']
-  @client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://frontdeskhq.com/')
-  headers = {
+@client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://frontdeskhq.com/')
+headers = {
     :grant_type => "authorization_code",
     :code => code,
     :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
