@@ -1,10 +1,14 @@
-all customers
+all customers (<%=@response['total_count']%>)
 
-<% @people.each do |person| %>
+
+
+<% @response['people'].each do |person| %>
 
 <%= person['first_name'] %> <%= person['last_name'] %> referral source: <%=person['secondary_info_field'] %> <br />
 
 
 <% end %>
+
+
 
 <%= response.body.inspect %>

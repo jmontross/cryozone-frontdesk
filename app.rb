@@ -114,7 +114,7 @@ get '/all_customers' do
   response = @token.get('/api/v2/desk/people') #, :params => { 'page' => @page })
   logger.info(response.inspect)
   erb :monthly_customers , locals: {response: response} 
-  @people = JSON.parse(response.body)
+  @response = JSON.parse(response.body)
   erb :people
 end
 
