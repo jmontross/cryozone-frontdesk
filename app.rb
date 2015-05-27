@@ -63,7 +63,7 @@ end
 
 get '/reports' do
   erb "reports and params :#{params.inspect} "
-  code = params["code"]
+  @code = params["code"]
   puts "code #{code}"
   logger.info("code #{code}")
 #   Desk and granting access to your application:
@@ -83,10 +83,10 @@ get '/reports' do
 @client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://thecryozone.frontdeskhq.com/')
 headers = {
     :grant_type => "authorization_code",
-    :code => code,
-    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => "s5JxQ4RQpm0feKtPHQZJAK97zrGqnlopI6bValSM", :client_secret => "FVYXzDzpYdwiDunSA0NkG7vMyTNOElWabw7hqn9V"}
+    :code => @code,
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret =>, @client_secret}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
-  @token = @client.auth_code.get_token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
+  @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   # response = @token.get('/api/resource', :params => { 'access_@token' => 'bar' })
   puts "@token #{@token}"
   logger.info( "@token #{@token}")
@@ -94,7 +94,7 @@ headers = {
   response = @token.get('/api/v2/desk/people')
   logger.info(response.inspect)
   logger.info(response.class.name)
-  "code: #{code}... token: #{@token.inspect}"
+  "code: #{@code}... token: #{@token.inspect}"
   erb :menu
 end
 
@@ -103,6 +103,16 @@ get '/all_customers' do
 end
 
 get '/monthly_customers' do
+ @client_id=ENV['CLIENT_ID']
+ @client_secret=ENV['CLIENT_SECRET']
+
+ @client ||= OAuth2::Client.new(@client_id, @client_secret, :site => 'https://thecryozone.frontdeskhq.com/')
+ headers = {
+    :grant_type => "authorization_code",
+    :code => @code,
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret =>, @client_secret}
+  @token = @client.auth_code.get_token(code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
+
   response = @token.get('/api/v2/desk/people', :params => { 'page' => '1' })
   erb :monthly_customers
 end
