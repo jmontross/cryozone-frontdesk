@@ -49,6 +49,7 @@ get '/' do
 
   url = @client.auth_code.authorize_url(:redirect_uri => 'http://thecryozone.herokuapp.com/reports')
   "login at <a href='#{url}'>#{url}</a>"
+  redirect url
 # => "https://example.org/oauth/authorization?response_type=code&client_id=client_id&redirect_uri=http://localhost:8080/oauth2/callback"
   #   grant_type=authorization_code&
   # code=AUTH_CODE&
@@ -93,7 +94,7 @@ headers = {
   response = @token.get('/api/v2/desk/people')
   logger.info(response.inspect)
   logger.info(response.class.name)
-  "code: #{code}... token: #{@token.inspect}"
+  "code: #{code}... token: #{token.inspect}"
   erb :menu
 end
 
