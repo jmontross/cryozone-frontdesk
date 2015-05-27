@@ -64,8 +64,8 @@ end
 get '/reports' do
   erb "reports and params :#{params.inspect} "
   @code = params["code"]
-  puts "code #{code}"
-  logger.info("code #{code}")
+  puts "code #{@code}"
+  logger.info("@code #{@code}")
 #   Desk and granting access to your application:
 # https://myapp.com/calback?code=AUTH_CODE
 
