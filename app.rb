@@ -100,6 +100,7 @@ headers = {
     people << body['people']
     page = body['next'].split('=').last
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
+    body = response.body
   end
   logger.info(response.inspect)
   logger.info(response.class.name)
