@@ -2,6 +2,16 @@
 		<h2> <a href="/all_customers"> All Customers </a> </h2>
 		<h2> <a href="/weekly_reports"> Weekly Reports </a> </h2>
 
+<h1> Customers by referral source </h1>
+
+<% referral_hash.each do |referral_source, person| do %>
+<h2> <%= referral_source %> </h2>
+<ul> 
+<li> <%= <%= person['first_name'] %> <%= person['last_name'] %> </li>
+</ul>
+
+<% end %>
+
 <h1> All Customers (<%=response['total_count']%>) </h1>
 
 
