@@ -99,7 +99,7 @@ headers = {
   logger.info("next page?") 
   logger.info(body['next']) 
   people = []
-  referral_hash = {}
+  
   while body['next'] do
     people << body['people']
     if body['next']
@@ -111,10 +111,14 @@ headers = {
     body['next'] = ""
     end
   end
-  people.flatten!
+  people = people.flatten
+  referral_hash = {}
   people.each do |person|
       person_info = {:first_name => person['first_name'], :last_name => person['last_name']}
-      referral_hash[person['secondary_info_field'].downcase!]? referral_hash[person['secondary_info_field'].downcase!] << person_info : referral_hash[person['secondary_info_field'].downcase!] = [person_info] 
+      logger.info("person_info: #{person_info.inspect}")
+      key = person['secondary_info_field']? person['secondary_info_field'].downcase! : "unclaimed"
+      logger.info("key_info: #{key.inspect}")
+      referral_hash[key]? referral_hash[key] << person_info : referral_hash[key] = [person_info] 
   end
 
   # logger.info(response.inspect)
@@ -123,7 +127,7 @@ headers = {
   logger.info("people.inspect complete")
   logger.info(people.flatten.inspect)
   logger.info("referral_hash")
-  logger.info(referral_hash)
+  logger.info(referral_hash.inspect)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
   erb :menu, locals: {people:  people, response: body} 
