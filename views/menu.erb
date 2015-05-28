@@ -5,10 +5,8 @@
 <h1> All Customers (<%=response['total_count']%>) </h1>
 
 
-<% response['people'].each do |person| %>
+<% people.each do |person| %>
 
 <%= person['first_name'] %> <%= person['last_name'] %> referral source: <%=person['secondary_info_field'] %> <br />
 
 <% end %>
-
-<%= response['next'] %>

@@ -108,7 +108,7 @@ headers = {
   logger.info(response.inspect)
   logger.info(response.class.name)
   "code: #{@code}... token: #{@token.inspect}"
-  erb :menu, locals: {response:  JSON.parse(response.body)} 
+  erb :menu, locals: {people:  people} 
 end
 
 get '/all_customers' do
