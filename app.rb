@@ -96,13 +96,15 @@ headers = {
   response = @token.get('/api/v2/desk/people')
   body = JSON.parse(response.body)
   people = []
-  while body['next'] do
+  while body['next'].length > 0 do
     people << body['people']
     if body['next']
     page = body['next'].split('=').last
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
     body = JSON.parse(response.body)
     # logger.info(body.inspect)
+    else
+    body['next'] = ""
     end
   end
   # logger.info(response.inspect)
