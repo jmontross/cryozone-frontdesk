@@ -99,7 +99,7 @@ headers = {
   logger.info("next page?") 
   logger.info(body['next']) 
   people = []
-  while body['next'].length > 0 do
+  while body['next'] do
     people << body['people']
     if body['next']
     page = body['next'].split('=').last
