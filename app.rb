@@ -95,6 +95,9 @@ headers = {
   # @token.
   response = @token.get('/api/v2/desk/people')
   body = JSON.parse(response.body)
+  logger.info(body.inspect)
+  logger.info("next page?") 
+  logger.info(body['next']) 
   people = []
   while body['next'].length > 0 do
     people << body['people']
@@ -107,6 +110,7 @@ headers = {
     body['next'] = ""
     end
   end
+
   # logger.info(response.inspect)
   logger.info(people.inspect)
   logger.info("people.inspect complete")
