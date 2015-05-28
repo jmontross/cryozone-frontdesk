@@ -96,7 +96,7 @@ headers = {
   response = @token.get('/api/v2/desk/people')
   body = JSON.parse(response.body)
   people = []
-  while body['next'] 
+  while body['next'] do
     people << body['people']
     page = body['next'].split('=').last.
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
