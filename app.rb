@@ -104,7 +104,7 @@ headers = {
     body = JSON.parse(response.body)
     # logger.info(body.inspect)
     end
-  # end
+  end
   # logger.info(response.inspect)
   # logger.info(people.inspect)
   # logger.info(response.class.name)
