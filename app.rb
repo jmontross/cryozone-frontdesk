@@ -102,10 +102,11 @@ headers = {
     page = body['next'].split('=').last.to_i
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
     body = JSON.parse(response.body)
-    logger.info(body.inspect)
+    # logger.info(body.inspect)
     end
   end
   logger.info(response.inspect)
+  logger.info(people.inspect)
   logger.info(response.class.name)
   "code: #{@code}... token: #{@token.inspect}"
   erb :menu, locals: {people:  people} 
