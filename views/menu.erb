@@ -1,3 +1,14 @@
 		<a href="/monthly_customers"> Current Monthly Customers </a>
 		<a href="/all_customers"> All Customers </a> 
 		<a href="/weekly_reports"> Weekly Reports </a>
+
+<h1> All Customers (<%=response['total_count']%>) </h1>
+
+
+<% response['people'].each do |person| %>
+
+<%= person['first_name'] %> <%= person['last_name'] %> referral source: <%=person['secondary_info_field'] %> <br />
+
+<% end %>
+
+<%= response['next'] %>

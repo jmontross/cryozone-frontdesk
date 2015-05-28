@@ -94,10 +94,17 @@ headers = {
   logger.info( "@token #{@token}")
   # @token.
   response = @token.get('/api/v2/desk/people')
+  body = JSON.parse(response.body)
+  people = []
+  while body['next'] 
+    people << body['people']
+    page = body['next'].split('=').last.
+    response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
+  end
   logger.info(response.inspect)
   logger.info(response.class.name)
   "code: #{@code}... token: #{@token.inspect}"
-  erb :menu
+  erb :menu, locals: {response:  JSON.parse(response.body)} 
 end
 
 get '/all_customers' do
