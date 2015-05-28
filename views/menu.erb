@@ -4,10 +4,12 @@
 
 <h1> Customers by referral source </h1>
 
-<% referral_hash.each do |referral_source, person| %>
+<% referral_hash.each do |referral_source, persons| %>
 <h2> <%= referral_source %> </h2>
 <ul> 
+<% persons.each do |person| %>
 <li> <%= person['first_name'] %> <%= person['last_name'] %> </li>
+<% end %> 
 </ul>
 
 <% end %>
