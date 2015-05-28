@@ -98,7 +98,7 @@ headers = {
   people = []
   while body['next'] do
     people << body['people']
-    page = body['next'].split('=').last.
+    page = body['next'].split('=').last
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
   end
   logger.info(response.inspect)
