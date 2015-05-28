@@ -102,10 +102,6 @@ headers = {
   referral_hash = {}
   while body['next'] do
     people << body['people']
-    body['people'].each do |person|
-      person_info = {:first_name => person['first_name'], :last_name => person['last_name']}
-      referral_hash[person['secondary_info_field'].downcase!]? referral_hash[person['secondary_info_field'].downcase!] << person_info : referral_hash[person['secondary_info_field'].downcase!] = [person_info] 
-    end
     if body['next']
     page = body['next'].split('=').last
     response = @token.get('/api/v2/desk/people', :params => { 'page' => page })
@@ -114,6 +110,11 @@ headers = {
     else
     body['next'] = ""
     end
+  end
+  people.flatten!
+  people.each do |person|
+      person_info = {:first_name => person['first_name'], :last_name => person['last_name']}
+      referral_hash[person['secondary_info_field'].downcase!]? referral_hash[person['secondary_info_field'].downcase!] << person_info : referral_hash[person['secondary_info_field'].downcase!] = [person_info] 
   end
 
   # logger.info(response.inspect)
@@ -125,7 +126,7 @@ headers = {
   logger.info(referral_hash)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
-  erb :menu, locals: {people:  people.flatten, response: body} 
+  erb :menu, locals: {people:  people, response: body} 
 end
 
 get '/all_customers' do
