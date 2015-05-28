@@ -131,7 +131,7 @@ headers = {
   logger.info(referral_hash.inspect)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
-  erb :menu, locals: {people:  people, response: body} 
+  erb :menu, locals: {people:  people, response: body,referral_hash: referral_hash} 
 end
 
 get '/all_customers' do
