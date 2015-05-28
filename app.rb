@@ -116,7 +116,8 @@ headers = {
   people.each do |person|
       person_info = {:first_name => person['first_name'], :last_name => person['last_name']}
       logger.info("person_info: #{person_info.inspect}")
-      key = person['secondary_info_field']? person['secondary_info_field'].downcase! : "unclaimed"
+      person['secondary_info_field']==""? key = person['secondary_info_field'].downcase! : key = "unclaimed"
+      puts key
       logger.info("key_info: #{key.inspect}")
       referral_hash[key]? referral_hash[key] << person_info : referral_hash[key] = [person_info] 
   end
