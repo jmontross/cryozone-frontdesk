@@ -107,6 +107,7 @@ headers = {
   end
   # logger.info(response.inspect)
   logger.info(people.inspect)
+  logger.info("people.inspect complete")
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
   erb :menu, locals: {people:  people, response: body} 
