@@ -123,15 +123,15 @@ headers = {
   end
 
   # logger.info(response.inspect)
-  logger.info(people.inspect)
+  # logger.info(people.inspect)
 
-  logger.info("people.inspect complete")
-  logger.info(people.flatten.inspect)
-  logger.info("referral_hash")
-  logger.info(referral_hash.inspect)
+  # logger.info("people.inspect complete")
+  # logger.info(people.flatten.inspect)
+  # logger.info("referral_hash")
+  # logger.info(referral_hash.inspect)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
-  erb :menu, locals: {people:  people, response: body,referral_hash: referral_hash} 
+  erb :menu, locals: {people:  people, response: body, referral_hash: referral_hash} 
 end
 
 get '/all_customers' do
@@ -170,6 +170,12 @@ get '/monthly_customers' do
   response = @token.get('/api/v2/desk/people') #, :params => { 'page' => @page })
   logger.info(response.inspect)
   erb :monthly_customers , locals: {response: response} 
+end
+
+get '/gas_events' do
+
+  ""
+
 end
 
 get '/weekly_reports' do 
