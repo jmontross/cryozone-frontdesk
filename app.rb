@@ -128,7 +128,7 @@ headers = {
   # logger.info("people.inspect complete")
   # logger.info(people.flatten.inspect)
   # logger.info("referral_hash")
-  # logger.info(referral_hash.inspect)
+  logger.info(referral_hash.inspect)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
   erb :menu, locals: {people:  people, response: body, referral_hash: referral_hash} 

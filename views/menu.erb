@@ -5,7 +5,7 @@
  -->
 <h1> Customers by referral source (<%=response['total_count']%>) </h1>
 
-<% referral_hash.sort.map do |referral_source, persons| %>
+<% referral_hash.each do |referral_source, persons| %>
 <h2> <%= referral_source %> </h2>
 <ul> 
 <% persons.each do |person| %>
