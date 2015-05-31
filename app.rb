@@ -129,9 +129,10 @@ headers = {
   # logger.info(people.flatten.inspect)
   # logger.info("referral_hash")
   logger.info(referral_hash.inspect)
+  logger.info("nil is key?", referral_hash[nil].inspect)
   # logger.info(response.class.name)
   # "code: #{@code}... token: #{@token.inspect}"
-  erb :menu, locals: {people:  people, response: body, referral_hash: referral_hash} 
+  erb :menu, locals: {people:  people, response: body, referral_hash: Hash[referral_hash.sort_by(&:first)]} 
 end
 
 get '/all_customers' do
