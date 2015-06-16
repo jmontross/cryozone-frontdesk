@@ -12,9 +12,9 @@
 require 'rubygems'
 require 'sinatra'
 require 'oauth2'
-require 'sinatra/activerecord'
-require './config/environments' #database configuration
-require './models/nitrogen_tank'        #Model class
+# require 'sinatra/activerecord'
+# require './config/environments' #database configuration
+# require './models/nitrogen_tank'        #Model class
 
 
 use Rack::Logger
