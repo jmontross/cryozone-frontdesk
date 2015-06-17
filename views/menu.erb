@@ -9,7 +9,7 @@
 <h2> <%= referral_source %> </h2>
 <ul> 
 <% persons.each do |person| %>
-<li> <a href="https://thecryozone.frontdeskhq.com/people/<%=person[:id]-person[:first_name]-person[:last_name]%>"><%= person[:first_name] %> <%= person[:last_name] %> </a> </li>
+<li> <a href="https://thecryozone.frontdeskhq.com/people/<%=person[:id]%>-<%=person[:first_name]%>-<%=person[:last_name]%>"><%= person[:first_name] %> <%= person[:last_name] %> </a> </li>
 <% end %> 
 </ul>
 
