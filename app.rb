@@ -118,7 +118,7 @@ headers = {
   people = people.flatten
   referral_hash = {}
   people.each do |person|
-      person_info = {:first_name => person['first_name'], :last_name => person['last_name']}
+      person_info = {:first_name => person['first_name'], :last_name => person['last_name'], :id => person['id']}
       logger.info("person_info: #{person_info.inspect}")
       person['secondary_info_field']==""? key = "unclaimed" : key = person['secondary_info_field'].downcase! 
       logger.info("key_info: #{key.inspect}")
