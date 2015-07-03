@@ -89,7 +89,9 @@ get '/reports' do
 headers = {
     :grant_type => "authorization_code",
     :code => @code,
-    :redirect_uri => "http://thecryozone.herokuapp.com/reports", :client_id => @client_id, :client_secret => @client_secret}
+    :redirect_uri => "http://thecryozone.herokuapp.com/reports", 
+    :client_id => @client_id, 
+    :client_secret => @client_secret}
   # token = client.auth_code.get_token('authorization_code_value', :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => {'Authorization' => 'Basic some_password'})
   @token = @client.auth_code.get_token(@code, :redirect_uri => 'http://thecryozone.herokuapp.com/reports', :headers => headers)
   session[:identity] = "CryoZone partner"
@@ -119,9 +121,9 @@ headers = {
   referral_hash = {}
   people.each do |person|
       person_info = {:first_name => person['first_name'], :last_name => person['last_name'], :id => person['id']}
-      logger.info("person_info: #{person_info.inspect}")
+      #logger.info("person_info: #{person_info.inspect}")
       person['secondary_info_field']==""? key = "unclaimed" : key = person['secondary_info_field'].downcase! 
-      logger.info("key_info: #{key.inspect}")
+      #logger.info("key_info: #{key.inspect}")
       if key == nil then
         key = "unclaimed"  
       end
